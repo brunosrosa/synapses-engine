@@ -1,227 +1,159 @@
-<<<<<<< HEAD
-# synapses-engine
-Motor de Conhecimento Adaptativo com RAG Avançado - Infraestrutura neural para recuperação e geração aumentada, transformando documentação estática em inteligência acionável. Indexação semântica, vetorização contextual e orquestração de fluxos cognitivos para sistemas de decisão empresarial.
-=======
-# Sistema RAG - Recoloca.ai
+# 🧠 Synapse Engine
 
-**Versão**: 2.0 (Consolidado)
-**Data**: Janeiro 2025
-**Autor**: @AgenteM_DevFastAPI
+> **O Coração Cognitivo do Ecossistema Maestro.AI**
+> 
+> _Um serviço de memória e raciocínio baseado em um Grafo de Conhecimento Temporal (GraphRAG)._
 
-## 📋 Visão Geral
+[![Status do Projeto](https://img.shields.io/badge/status-em_desenvolvimento-yellow)](https://github.com/) [![Versão](https://img.shields.io/badge/versão-v0.1_(Arquitetura)-blue)](./docs/CHANGELOG.md) [![Linguagem](https://img.shields.io/badge/python-3.11+-3776AB?logo=python&logoColor=white)](https://www.python.org/) [![Arquitetura](https://img.shields.io/badge/arquitetura-GraphRAG-blueviolet)](https://arxiv.org/abs/2404.18731) [![API](https://img.shields.io/badge/api-FastAPI-009688?logo=fastapi)](https://fastapi.tiangolo.com/) [![Licença](https://img.shields.io/badge/licença-pendente-lightgrey)](./LICENSE)
 
-Sistema RAG (Retrieval-Augmented Generation) consolidado e otimizado para o projeto Recoloca.ai. Esta versão 2.0 representa uma reorganização completa da estrutura anterior, eliminando duplicações e criando uma arquitetura mais limpa e eficiente.
+## 🧠 O Que é o Synapse Engine?
 
-## 🏗️ Estrutura Consolidada
+O **Synapse Engine** não é um banco de dados vetorial. É o **sistema nervoso central cognitivo** para o ecossistema `Maestro.AI`. Sua missão é ir além da simples recuperação de informações (RAG tradicional) para fornecer aos agentes de IA uma **memória organizacional profunda, contextual e historicamente consciente**.
+
+Em vez de armazenar documentos isolados, o Synapse Engine constrói um **Grafo de Conhecimento (Knowledge Graph)** dinâmico a partir dos projetos. Ele não apenas sabe _o que_ está no código, mas entende _como_ as funções se conectam, _por que_ uma decisão foi tomada e _quando_ uma mudança crucial ocorreu.
+
+Esta capacidade de raciocínio sobre relações e tempo é o que permite aos nossos agentes tomar decisões inteligentes e evitar os erros de contexto comuns em sistemas de IA mais simples.
+
+### ✨ As Quatro Forças Nucleares
+
+O poder do Synapse Engine reside em quatro capacidades fundamentais:
+
+1. **Fluência Estrutural e Semântica:** Compreende tanto a estrutura sintática do código (via ASTs) quanto a intenção semântica por trás dele (via LLMs).
+    
+2. **Consciência Temporal:** Trata cada `commit` como um evento no tempo, permitindo "viajar no tempo" para entender a evolução e a causa raiz dos problemas.
+    
+3. **Raciocínio Inferencial Multi-Salto:** Permite aos agentes "ligar os pontos" e descobrir relações complexas e indiretas que seriam invisíveis de outra forma.
+    
+4. **Motor da Governança:** Fornece os atributos contextuais em tempo real que alimentam o motor de políticas (ABAC) do `Maestro.AI`, transformando regras estáticas em julgamento dinâmico.
+    
+
+## 🏗️ Arquitetura de Alto Nível (GraphRAG)
+
+O Synapse Engine implementa uma arquitetura **GraphRAG (Retrieval-Augmented Generation sobre Grafos de Conhecimento)**, que é superior ao RAG vetorial para tarefas complexas de engenharia de software.
 
 ```
-rag_infra/
-├── 📁 src/                  # Código fonte principal da aplicação RAG
-│   ├── 📁 core/              # Lógica de negócio e componentes centrais
-│   │   ├── constants.py       # Constantes globais (e.g., caminhos, nomes de modelos)
-│   │   ├── embedding_model.py # Carregamento e gerenciamento do modelo de embedding
-│   │   ├── rag_indexer.py     # Lógica para criar e atualizar índices (FAISS, etc.)
-│   │   └── rag_retriever.py   # Lógica para buscar e recuperar documentos
-│   │
-│   ├── 📁 diagnostics/       # Ferramentas para diagnóstico e correção do sistema
-│   │   ├── rag_diagnostics.py # Script para rodar uma suíte de testes de saúde
-│   │   └── rag_fixes.py       # Funções para corrigir problemas comuns
-│   │
-│   ├── 📁 utils/              # Módulos utilitários reutilizáveis
-│   │   ├── 📁 maintenance/    # Scripts para manutenção (reindexar, sincronizar)
-│   │   └── 📁 optimization/   # Ferramentas para otimização de performance
-│   │
-│   └── 📁 tests/              # Testes automatizados
-│       └── test_rag_final.py  # Teste de integração final do sistema RAG
-│
-├── 📁 server/               # Lógica do servidor para expor o RAG como um serviço
-│   ├── mcp_server.py        # Implementação do servidor MCP para o Trae IDE
-│   └── 📁 trae_ide_mcp_configuration/ # Configuração do MCP
-│
-├── 📁 data_index/           # Armazenamento dos índices e dados processados
-│   ├── faiss_index.bin      # Índice vetorial FAISS
-│   ├── embeddings.pt        # Embeddings dos documentos (PyTorch)
-│   ├── documents.json       # Conteúdo dos documentos indexados
-│   └── metadata.json        # Metadados associados aos documentos
-│
-├── 📁 source_documents/     # Documentos originais que servem de base para o RAG
-├── 📁 config/               # Arquivos de configuração
-├── 📁 logs/                 # Logs gerados pela aplicação
-└── 📁 results_and_reports/  # Relatórios de diagnósticos e benchmarks
+graph LR
+    subgraph Fontes de Dados
+        A[Repositórios Git]
+        B[Documentação do Codex Prime]
+        C[APIs Externas]
+    end
+
+    subgraph Pipeline de Ingestão
+        D[Análise Estrutural<br>(e.g., tree-sitter)]
+        E[Análise Semântica<br>(LLM)]
+    end
+
+    subgraph Synapse Engine Core
+        F[(Grafo de Conhecimento<br>Temporal)]
+        G[API de Consulta (GraphQL/REST)]
+    end
+
+    subgraph Consumidores
+        H[Maestro.AI]
+        I[Agentes de IA]
+    end
+
+    A --> D;
+    B --> E;
+    C --> E;
+    D --> F;
+    E --> F;
+    F --> G;
+    G --> H;
+    G --> I;
 ```
 
-## 🚀 Principais Melhorias da Versão 2.0
+1. **Ingestão:** Um pipeline automatizado analisa continuamente as fontes de dados, extraindo entidades (funções, classes, issues) e relações (`CHAMA`, `IMPLEMENTA`, `RESOLVE`).
+    
+2. **Construção do Grafo:** As informações extraídas são usadas para construir e enriquecer dinamicamente o Grafo de Conhecimento central, onde cada mudança é versionada por `commit`.
+    
+3. **Consulta:** O `Maestro.AI` e os agentes fazem perguntas complexas ao Synapse Engine através de sua API, recebendo como resposta não apenas texto, mas subgrafos de conhecimento rico e contextual.
+    
 
-### ✅ Consolidação Completa
-- **Eliminação de duplicações**: Removidos 15+ scripts duplicados
-- **Unificação de funcionalidades**: Scripts similares consolidados em módulos únicos
-- **Estrutura limpa**: Organização lógica por responsabilidade
+## 🔌 API e Endpoints Principais
 
-### 🔧 Módulos Consolidados
+O Synapse Engine expõe sua funcionalidade através de uma API RESTful (construída com FastAPI).
 
-#### 1. **Diagnósticos Unificados** (`diagnostics/`)
-- `rag_diagnostics.py`: Todos os testes de diagnóstico em um só lugar
-- `rag_fixes.py`: Todas as correções automatizadas centralizadas
+- `POST /ingest`: Aciona o pipeline de ingestão para um novo repositório ou fonte de dados.
+    
+- `POST /query`: O endpoint principal para consulta. Aceita uma pergunta em linguagem natural e retorna um subgrafo de conhecimento relevante.
+    
+- `GET /entity/{id}`: Recupera informações detalhadas sobre uma entidade específica no grafo (e.g., uma função ou um agente).
+    
+- `GET /history/{entity_id}`: Retorna o histórico de versões de uma entidade específica, permitindo a análise temporal.
+    
 
-#### 2. **Utilitários Consolidados** (`utils/`)
-- `rag_utilities.py`: Backend checks, debug PyTorch, consistência de índice
-- `rag_maintenance.py`: Manutenção completa do sistema
+## 🚀 Como Começar (Getting Started)
 
-#### 3. **Suíte de Otimização** (`scripts/`)
-- `rag_optimization_suite.py`: RTX 2060, benchmarks, conversões unificadas
+Instruções para configurar e executar uma instância local do `Synapse Engine`.
 
-### 🎯 Funcionalidades Principais
+### Pré-requisitos
 
-#### Sistema de Diagnóstico
-```python
-from rag_infra.diagnostics.rag_diagnostics import RAGDiagnostics
+- Python 3.11+
+    
+- Docker e Docker Compose
+    
+- Uma instância de uma base de dados de grafos (e.g., Neo4j, recomendada para o início)
+    
 
-diag = RAGDiagnostics()
-results = diag.run_full_diagnostics()
-```
+### Instalação
 
-#### Sistema de Correções
-```python
-from rag_infra.diagnostics.rag_fixes import RAGFixes
+1. **Clone o repositório:**
+    
+    ```
+    git clone [URL_DO_REPOSITORIO_SYNAPSE]
+    cd SynapseEngine
+    ```
+    
+2. Inicie os serviços com Docker Compose:
+    
+    Este comando irá iniciar a API do Synapse e o banco de dados de grafos.
+    
+    ```
+    docker-compose up -d
+    ```
+    
+3. **Faça sua primeira ingestão:**
+    
+    ```
+    curl -X POST http://localhost:8000/ingest \
+         -H "Content-Type: application/json" \
+         -d '{"source_type": "git", "uri": "https://github.com/exemplo/repositorio.git"}'
+    ```
+    
+4. **Faça sua primeira consulta:**
+    
+    ```
+    curl -X POST http://localhost:8000/query \
+         -H "Content-Type: application/json" \
+         -d '{"question": "Qual a função principal do módulo de autenticação?"}'
+    ```
+    
 
-fixer = RAGFixes()
-fixer.apply_all_fixes()
-```
+## 📖 Documentação
 
-#### Manutenção do Sistema
-```python
-from rag_infra.utils.rag_maintenance import RAGMaintenance
+A documentação arquitetural completa do `Synapse Engine` pode ser encontrada em [`/docs/03_TECNOLOGIA_ENGINEERING/SYNAPSE_ENGINE_HLD.md`](https://gemini.google.com/app/docs/03_TECNOLOGIA_ENGINEERING/SYNAPSE_ENGINE_HLD.md "null") dentro da instância do `Codex Prime` deste projeto.
 
-maintenance = RAGMaintenance()
-report = maintenance.generate_maintenance_report()
-```
+## 🤝 Como Contribuir
 
-#### Otimização RTX 2060
-```python
-from rag_infra.scripts.rag_optimization_suite import RTX2060Optimizer
+O `Synapse Engine` é um projeto complexo e de vanguarda. As contribuições mais valiosas estão nas áreas de:
 
-optimizer = RTX2060Optimizer()
-optimizer.setup_optimizations()
-```
+- **Melhorar os Parsers de Código:** Adicionar suporte para novas linguagens de programação no pipeline de ingestão.
+    
+- **Otimizar Consultas de Grafo:** Desenvolver algoritmos de consulta mais eficientes.
+    
+- **Pesquisar Novos Modelos de Grafo:** Explorar novas formas de modelar o conhecimento de software.
+    
 
-## 📊 Scripts Principais
+Por favor, consulte o nosso [guia de contribuição](https://gemini.google.com/app/CONTRIBUTING.md "null") para mais detalhes.
 
-### 🔍 Diagnóstico e Manutenção
-- **`diagnostics/rag_diagnostics.py`**: Diagnóstico completo do sistema
-- **`diagnostics/rag_fixes.py`**: Correções automatizadas
-- **`utils/rag_maintenance.py`**: Manutenção e limpeza
+## 📄 Licença
 
-### ⚡ Otimização e Performance
-- **`scripts/rag_optimization_suite.py`**: Otimizações RTX 2060 e benchmarks
-- **`scripts/demo_rag_system.py`**: Demonstração prática
-- **`scripts/test_rag_final.py`**: Testes finais integrados
+Distribuído sob a licença [Nome da Licença]. Veja `LICENSE.txt` para mais informações.
 
-### 🔄 Operações
-- **`scripts/rag_auto_sync.py`**: Sincronização automática
-- **`scripts/rebuild_index.py`**: Reconstrução de índices
+## 📞 Contato
 
-## 🛠️ Como Usar
+Maestro (Desenvolvedor Principal): Bruno S. Rosa
 
-### 1. Diagnóstico Inicial
-```bash
-cd rag_infra
-python -m diagnostics.rag_diagnostics
-```
-
-### 2. Aplicar Correções
-```bash
-python -m diagnostics.rag_fixes
-```
-
-### 3. Manutenção do Sistema
-```bash
-python -m utils.rag_maintenance
-```
-
-### 4. Otimização RTX 2060
-```bash
-python -m scripts.rag_optimization_suite --mode setup
-```
-
-### 5. Teste Final
-```bash
-python -m scripts.test_rag_final
-```
-
-## 📈 Benefícios da Consolidação
-
-### ✅ Redução de Complexidade
-- **-70% arquivos**: De 25+ scripts para 8 módulos principais
-- **-60% duplicação**: Eliminação de código repetido
-- **+90% organização**: Estrutura lógica clara
-
-### 🚀 Melhoria de Performance
-- **Carregamento mais rápido**: Menos imports desnecessários
-- **Menor uso de memória**: Código otimizado
-- **Execução eficiente**: Fluxos consolidados
-
-### 🔧 Facilidade de Manutenção
-- **Ponto único de verdade**: Cada funcionalidade em um lugar
-- **Debugging simplificado**: Logs centralizados
-- **Atualizações eficientes**: Mudanças em módulos únicos
-
-## 🔗 Integração com o Projeto
-
-### MCP Server
-```python
-# Configuração automática via core_logic/mcp_server.py
-from rag_infra.core_logic.mcp_server import setup_mcp_server
-server = setup_mcp_server()
-```
-
-### FastAPI Integration
-```python
-# Integração direta com backend FastAPI
-from rag_infra.core_logic.rag_retriever import get_retriever
-retriever = get_retriever()
-```
-
-## 📝 Logs e Relatórios
-
-Todos os módulos geram logs estruturados em:
-- `logs/`: Logs de execução
-- `results_and_reports/`: Relatórios detalhados
-- `metrics/`: Métricas de performance
-
-## 🔄 Migração da Versão Anterior
-
-Se você estava usando a versão anterior:
-
-1. **Backup criado**: `rag_infra_backup_20250619/`
-2. **Scripts removidos**: Funcionalidades migradas para módulos consolidados
-3. **Imports atualizados**: Use os novos caminhos dos módulos
-
-### Mapeamento de Migração
-```python
-# ANTES (v1.x)
-from scripts.diagnostico_rag import test_imports
-from scripts.correcao_rag import fix_threshold
-
-# DEPOIS (v2.0)
-from diagnostics.rag_diagnostics import RAGDiagnostics
-from diagnostics.rag_fixes import RAGFixes
-```
-
-## 🎯 Próximos Passos
-
-1. **Testes de integração**: Validar todos os módulos consolidados
-2. **Documentação API**: Gerar docs automáticas
-3. **CI/CD**: Configurar pipeline de testes
-4. **Monitoramento**: Implementar alertas automáticos
-
-## 📞 Suporte
-
-Para questões técnicas:
-- Consulte os logs em `logs/`
-- Execute diagnósticos: `python -m diagnostics.rag_diagnostics`
-- Verifique relatórios em `results_and_reports/`
-
----
-
-**Sistema RAG Recoloca.ai v2.0** - Consolidado, Otimizado, Pronto para Produção 🚀
->>>>>>> 0547567 (feat: Initial commit of synapses-engine)
+LinkedIn: [/In/BrunoSRosa](https://linkedin.com/in/brunosrosa)
